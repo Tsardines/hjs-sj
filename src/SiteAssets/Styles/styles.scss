@@ -1,0 +1,18 @@
+.app_container {
+    margin: 2rem 20rem;
+
+    .app_header-title {
+        margin-bottom: 2rem;
+    }
+}
+
+/* ----- app_body ----- */
+
+.app_body {
+    display: flex;
+    flex-direction: column;
+
+    .app_body-questions {
+        margin-bottom: 2rem;
+    }
+}
