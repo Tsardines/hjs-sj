@@ -5,7 +5,6 @@ const { check, validationResult } = require("express-validator");
 
 const connectDB = require("./src/SiteAssets/Scripts/connection");
 const Applicant = require("./src/SiteAssets/Scripts/applicant");
-const { next } = require("cheerio/lib/api/traversing");
 
 const app = express();
 
@@ -23,9 +22,9 @@ app.use(express.urlencoded({ extended: true })); // parses applicant answers
 const Port = process.env.Port || 3000;
 app.listen(Port, () => console.log("Server started..."));
 
-/**
+/******
  * @GET
- */
+ ******/
 
 // Home page route
 app.get("/", (req, res) => {
@@ -54,17 +53,14 @@ app.get("/admin", (req, res) => {
         });
 });
 
-/**
+/******
  * @POST
- */
+ ******/
 
 // Applic. page submit
 app.post(
     "/application/submit",
     [
-        // check("_name")
-        //     .notEmpty()
-        //     .withMessage("First and last name cannot be empty"),
         check("_a1").matches("phrase-boundaries"),
         check("_a2").matches("policy"),
         check("_a3").matches("src-authenticity"),
@@ -75,21 +71,13 @@ app.post(
         const applicant = new Applicant(req.body);
 
         if (!errors.isEmpty()) {
-            // return req.body;
-            console.log("applicant provided wrong answer(s)");
+            // if there are errors
+            console.log("applicant provided at least one wrong answer");
 
-            // applicant
-            //     .end()
-            //     .then((result) => {
-            //         res.redirect("/submitted");
-            //     })
-            //     .catch((err) => {
-            //         console.log(err);
-            //     });
+            res.redirect("/submitted");
+            return;
         } else {
             console.log("right answers");
-            // return res.status(400);
-            // .json({ errors: errors.array() });
         }
 
         applicant
