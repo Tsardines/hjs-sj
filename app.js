@@ -1,6 +1,7 @@
-const express = require("express");
+const express = require("express"),
+    path = require("path");
+
 const connectDB = require("./src/SiteAssets/Scripts/connection");
-const path = require("path");
 const Applicant = require("./src/SiteAssets/Scripts/applicant");
 
 const app = express();
@@ -29,8 +30,13 @@ app.get("/", (req, res) => {
 });
 
 // Application page route
-app.get("/application", (req, res) => {
+app.get("/application/submit", (req, res) => {
     res.render("application", { title: "Elementary School Teacher" });
+});
+
+// Submit success page route
+app.get("/submitted", (req, res) => {
+    res.render("submitted", { title: "Submission" });
 });
 
 // Admin page route
@@ -50,6 +56,18 @@ app.get("/admin", (req, res) => {
  */
 
 // Applic. page submit
-app.post("/application", (req, res) => {
+app.post("/application/submit", (req, res) => {
     console.log(req.body);
+    const applicant = new Applicant(req.body);
+
+    applicant
+        .save()
+        .then((result) => {
+            res.redirect("/submitted");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
+
+/////

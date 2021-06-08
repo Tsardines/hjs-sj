@@ -10,7 +10,7 @@
                 <h3 class="app_header-subt subtitle">
                     Hello,
                     <br></br>
-                    Thank you for submitting your resume! The Springfield Public School district is a network of elementary and middle schools that currently serve over 1,340 students from the surrounding area. Our commitment to holistic child development is paralleled with our commitment to creating a joyful community for families and staff. The primary responsibility of an elementary school teacher is to cultivate a healthy, ambitious learning environment. 
+                    Thank you for submitting your resume! The Springfield Public School district is a network of K-12 schools that currently serve over 1,340 students from the surrounding area. Our commitment to holistic child development is paralleled with our commitment to creating a joyful community for families and staff. The primary responsibility of an elementary school teacher is to cultivate a healthy, ambitious learning environment. 
                     <br></br>
                     Our district uses a series of questions for all prospective applicants, that you can answer below. 
                     <br></br>
@@ -20,7 +20,7 @@
 
             <hr></hr>
 
-            <form action="/admin" class="form_application" method="POST">
+            <form action="/application/submit" class="form_application" method="POST">
 
                 <div class="app_body">
 
@@ -44,10 +44,10 @@
                             <div class="select">
                                 <select name="_a1">
                                     <option></option>
-                                    <option class="question_1-op">Have the student partake in repeated readings</option>
-                                    <option class="question_1-op" value="ans">Provide the student with text that has phrase boundaries</option>
-                                    <option class="question_1-op">Guide the student in encoding activities</option>
-                                    <option class="question_1-op">Teach the student about the uses of different punctuation marks</option>
+                                    <option value="repeated-reading" class="question_1-op">Have the student partake in repeated readings</option>
+                                    <option value="phrase-boundaries" class="question_1-op">Provide the student with text that has phrase boundaries</option> <!---->
+                                    <option value="encoding-activities" class="question_1-op">Guide the student in encoding activities</option>
+                                    <option value="punct-marks" class="question_1-op">Teach the student about the uses of different punctuation marks</option>
                                 </select>
                             </div>
                         </field>
@@ -59,10 +59,10 @@
                             <div class="select">
                                 <select name="_a2">
                                     <option></option>
-                                    <option class="question_2-op" value="">An assertion of fact</option>
-                                    <option class="question_2-op" value="">An assertion of value</option>
-                                    <option class="question_2-op" value="ans">An assertion of policy</option>
-                                    <option class="question_2-op" value="">An assertion of rhetorical situation</option>
+                                    <option value="fact" class="question_2-op">An assertion of fact</option>
+                                    <option value="value" class="question_2-op">An assertion of value</option>
+                                    <option value="policy" class="question_2-op">An assertion of policy</option> <!---->
+                                    <option value="rhetoric" class="question_2-op">An assertion of rhetorical situation</option>
                                 </select>
                             </div>
                         </field>
@@ -74,11 +74,10 @@
                             <div class="select">
                                 <select name="_a3">
                                     <option></option>
-                                    <option class="question_3-op" value="ans">Verify the source's information to consider the authenticity of and the amount of possible bias therein</option>
-                                    <option class="question_3-op">Examine the complexity of the information</option>
-                                    <option class="question_3-op">Determine the readability of the information in relation to the audience</option>
-                                <option class="question_3-op">Identify if the source has both opinion and fact</option>
-
+                                    <option value="src-authenticity" class="question_3-op">Verify the source's information to consider the authenticity of and the amount of possible bias therein</option> <!---->
+                                    <option value="examine-complexity" class="question_3-op">Examine the complexity of the information</option>
+                                    <option value="info-readability" class="question_3-op">Determine the readability of the information in relation to the audience</option>
+                                    <option value="opinion-and-fact" class="question_3-op">Identify if the source has both opinion and fact</option>
                                 </select>
                             </div>
                         </field>
@@ -90,38 +89,35 @@
                             <div class="select">
                                 <select name="_a4">                   
                                     <option></option>
-                                    <option class="question_4-op">Encourage oral storytelling in the classroom</option>
-                                    <option class="question_4-op" value="ans">Provide effective phonics instruction</option>
-                                    <option class="question_4-op">Replace basal texts with real literature</option>
-                                    <option class="question_4-op">Have students make daily visits to the school library</option>
+                                    <option value="encourage-storytelling" class="question_4-op">Encourage oral storytelling in the classroom</option>
+                                    <option value="provide-phonics" class="question_4-op">Provide effective phonics instruction</option> <!---->
+                                    <option value="real-lit" class="question_4-op">Replace basal texts with real literature</option>
+                                    <option value="visit-library" class="question_4-op">Have students make daily visits to the school library</option>
                                 </select>
-                            </div>
-                        </field>
-                    </div>
-
-                    <div class="app_body-questions">
-                        <field class="form" id="question_date">
-                            <label class="label">Please provide today's date.</label>
-                            <div class="control">
-                                <input
-                                    class="input"
-                                    type="text"
-                                    placeholder="MM/DD/YYYY"
-                                />
                             </div>
                         </field>
                     </div>
 
 
                 </div> <!-- app_body -->
+
+                <hr></hr>
+
+                <div class="app_button-container">
+                    <button class="button is-link">Submit</button>
+                </div>
            
             </form>
-            <hr></hr>
+            
 
-            <div class="app_button-container">
-                <button class="button is-link">Submit</button>
-            </div>
+            
         </div> <!-- app_container -->
+
+        <script>
+            const el = document.querySelector("#question-4 select option")
+            const vals = (el.option[el.value] > 0) ? "" : "empty"
+            console.log(vals)
+        </script>
 
     </body>
 </html>

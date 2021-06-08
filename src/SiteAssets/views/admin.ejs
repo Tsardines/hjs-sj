@@ -8,6 +8,7 @@
                 <h2 class="app_header-title title is-1">
                     Job Board - Applicant Viewer
                 </h2>
+                <hr></hr>
                 <h4 class="app_header-subt subtitle is-4">
                     Current Applicants:
                 </h4>
@@ -16,8 +17,18 @@
             <div class="app_body">
                 <% if (applicants.length > 0) { %> 
                     <% applicants.forEach(person => { %>
-                        <h3 class="appl_name title is-3"><span class="f-bold">Name:</span> <%= person._name %></h3>
-                        <p class="appl_a1"><%= person._a1 %></p>
+                        <div class="appl_container">
+                            <h3 class="appl_name title is-3"><span class="f-bold">Name:</span> <%= person._name %></h3>
+                            <div class="content">
+                                <p><span class="f-bold">Submitted: </span><%= person.createdAt %></p>
+                                <ul class="appl_answers-list">
+                                    <li id="appl_a1" class="appl_answer-li"><%= person._a1 %></li>
+                                    <li id="appl_a2" class="appl_answer-li"><%= person._a2 %></li>
+                                    <li id="appl_a3" class="appl_answer-li"><%= person._a3 %></li>
+                                    <li id="appl_a4" class="appl_answer-li"><%= person._a4 %></li>
+                                </ul>
+                            </div>
+                        </div>
                     <% }) %> 
                 <% } else { %>
                     <p>No applicants to display.</p>

@@ -13,7 +13,7 @@
 
 /* ----- app container ----- */
 .app_container {
-  margin: 0 auto;
+  margin: 0 auto 5rem auto;
   width: 50%;
 }
 
@@ -35,5 +35,13 @@
 
 .app_body .app_body-questions {
   margin-bottom: 2rem;
+}
+
+/* ----- /admin ----- */
+.appl_container {
+  background-color: #f2f1f1;
+  border-radius: 0.6rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
 /*# sourceMappingURL=styles.css.map */
