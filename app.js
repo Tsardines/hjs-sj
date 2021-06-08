@@ -1,8 +1,11 @@
 const express = require("express"),
     path = require("path");
 
+const { check, validationResult } = require("express-validator");
+
 const connectDB = require("./src/SiteAssets/Scripts/connection");
 const Applicant = require("./src/SiteAssets/Scripts/applicant");
+const { next } = require("cheerio/lib/api/traversing");
 
 const app = express();
 
@@ -13,7 +16,7 @@ connectDB();
 app.set("views", "./src/SiteAssets/views");
 app.set("view engine", "ejs");
 
-// Middleware for static files (styles)
+// For static files (styles)
 app.use(express.static(path.join(__dirname + "/public")));
 app.use(express.urlencoded({ extended: true })); // parses applicant answers
 
@@ -31,10 +34,10 @@ app.get("/", (req, res) => {
 
 // Application page route
 app.get("/application/submit", (req, res) => {
-    res.render("application", { title: "Elementary School Teacher" });
+    res.render("application", { title: "4th Grade Teacher" });
 });
 
-// Submit success page route
+// Submission success page route
 app.get("/submitted", (req, res) => {
     res.render("submitted", { title: "Submission" });
 });
@@ -56,18 +59,46 @@ app.get("/admin", (req, res) => {
  */
 
 // Applic. page submit
-app.post("/application/submit", (req, res) => {
-    console.log(req.body);
-    const applicant = new Applicant(req.body);
+app.post(
+    "/application/submit",
+    [
+        // check("_name")
+        //     .notEmpty()
+        //     .withMessage("First and last name cannot be empty"),
+        check("_a1").matches("phrase-boundaries"),
+        check("_a2").matches("policy"),
+        check("_a3").matches("src-authenticity"),
+        check("_a4").matches("provide-phonics"),
+    ],
+    (req, res) => {
+        const errors = validationResult(req);
+        const applicant = new Applicant(req.body);
 
-    applicant
-        .save()
-        .then((result) => {
-            res.redirect("/submitted");
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
+        if (!errors.isEmpty()) {
+            // return req.body;
+            console.log("applicant provided wrong answer(s)");
 
-/////
+            // applicant
+            //     .end()
+            //     .then((result) => {
+            //         res.redirect("/submitted");
+            //     })
+            //     .catch((err) => {
+            //         console.log(err);
+            //     });
+        } else {
+            console.log("right answers");
+            // return res.status(400);
+            // .json({ errors: errors.array() });
+        }
+
+        applicant
+            .save()
+            .then((result) => {
+                res.redirect("/submitted");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+);
