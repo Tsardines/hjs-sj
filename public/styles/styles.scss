@@ -1,7 +1,27 @@
-.app_container {
-    margin: 2rem 20rem;
+$my-variable: #000000;
 
-    .app_header-title {
+.f-bold {
+    font-weight: bold;
+}
+
+.f-ital {
+    font-weight: italic;
+}
+
+/* ----- navigation ----- */
+
+.nav_container {
+    margin-bottom: 2rem;
+}
+
+/* ----- app container ----- */
+
+.app_container {
+    margin: 0 auto;
+    width: 50%;
+
+    .app_header-title,
+    .app_header-subt {
         margin-bottom: 2rem;
     }
 }

@@ -4,12 +4,24 @@
     <body>
         <div class="app_container">
             <div class="app_header">
+                <%- include('./partials/nav.ejs') %>
                 <h2 class="app_header-title title is-1">
                     Job Board - Applicant Viewer
                 </h2>
                 <h4 class="app_header-subt subtitle is-4">
                     Current Applicants:
                 </h4>
+            </div>
+
+            <div class="app_body">
+                <% if (applicants.length > 0) { %> 
+                    <% applicants.forEach(person => { %>
+                        <h3 class="appl_name title is-3"><span class="f-bold">Name:</span> <%= person._name %></h3>
+                        <p class="appl_a1"><%= person._a1 %></p>
+                    <% }) %> 
+                <% } else { %>
+                    <p>No applicants to display.</p>
+                <% } %>
             </div>
         </div>
     </body>
